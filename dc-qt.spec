@@ -44,8 +44,7 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy Qt do dctc (Direct Connect).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_desktopdir}
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}}
 
 %{__make} install \
 	 DESTDIR=$RPM_BUILD_ROOT \
