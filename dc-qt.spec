@@ -7,11 +7,12 @@ License:	GPL v2
 Group:		X11/Applications/Networking
 # Sourceforge is crazy with this mirrors... telia is fast...
 Source0:	http://telia.dl.sourceforge.net/sourceforge/dc-qt/%{name}-%{version}.tar.gz
+Source1:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
 URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	qt-devel
+BuildRequires:	qt-devel >= 2.3
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -34,10 +35,13 @@ export QTDIR=%{_includedir}/qt
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Communications,%{_datadir}/pixmaps,%{_bindir}}
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
+install dc_qt		$RPM_BUILD_ROOT%{_bindir}
+install icon.xpm	$RPM_BUILD_ROOT%{_datadir}/pixmaps/dc_qt.xpm
+install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
 gzip -9nf README DESIGN
 
@@ -48,4 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/dc_qt
+%attr(644,root,root) %{_datadir}/pixmaps/*.xpm
 %attr(644,root,root) %{_applnkdir}/Network/Communications/*
