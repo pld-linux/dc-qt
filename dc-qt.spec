@@ -34,7 +34,11 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %build
 QTDIR=%{_includedir}/qt
 export QTDIR
-%{__make}
+%{__make} \
+	CC="%{__cc}" \
+	CXX="%{__cxx}" \
+	CFLAGS="%{rpmcflags}" \
+	CXXFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
