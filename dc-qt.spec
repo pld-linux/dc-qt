@@ -1,15 +1,13 @@
 Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	QT GUI do dctc (Direct Connect)
 Name:		dc-qt
-Version:	0.0.3
-Release:	3
+Version:	0.0.6
+Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	76842bd41b0ed7729617412fb2cb2ac2
+# Source0-md5:	71b76b159e48719e69c623bad89fbcba
 Source1:	%{name}.desktop
-Patch0:		%{name}-makefile.patch
-Patch1:		%{name}-home_etc.patch
 URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -26,12 +24,12 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
-QTDIR=%{_includedir}/qt
-export QTDIR
+export QTDIR=/usr
+
+qmake
+
 %{__make} \
 	CC="%{__cc}" \
 	CXX="%{__cxx}" \
@@ -42,10 +40,8 @@ export QTDIR
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Communications,%{_datadir}/pixmaps,%{_bindir}}
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
-
-install dc_qt		$RPM_BUILD_ROOT%{_bindir}
-install icon.xpm	$RPM_BUILD_ROOT%{_datadir}/pixmaps/dc_qt.xpm
+install dc-qt		$RPM_BUILD_ROOT%{_bindir}
+#install icon.xpm	$RPM_BUILD_ROOT%{_datadir}/pixmaps/dc_qt.xpm
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
 %clean
@@ -55,5 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README DESIGN
 %attr(755,root,root) %{_bindir}/dc_qt
-%attr(644,root,root) %{_datadir}/pixmaps/*.xpm
+#%attr(644,root,root) %{_datadir}/pixmaps/*.xpm
 %attr(644,root,root) %{_applnkdir}/Network/Communications/*
