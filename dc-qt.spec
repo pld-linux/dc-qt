@@ -7,6 +7,7 @@ License:	GPL v2
 Group:		X11/Applications/Networking
 # Sourceforge is crazy with this mirrors... telia is fast...
 Source0:	http://telia.dl.sourceforge.net/sourceforge/dc-qt/%{name}-%{version}.tar.gz
+# Source0-md5:	76842bd41b0ed7729617412fb2cb2ac2
 Source1:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-home_etc.patch
