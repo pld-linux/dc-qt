@@ -1,0 +1,51 @@
+Summary:	QT GUI for dctc (Direct Connect)
+Summary(pl):	QT GUI do dctc (Direct Connect)
+Name:		dc-qt
+Version:	0.0.3
+Release:	1
+License:	GPL v2
+Group:		X11/Applications/Networking
+# Sourceforge is crazy with this mirrors... telia is fast...
+Source0:	http://telia.dl.sourceforge.net/sourceforge/dc-qt/%{name}-%{version}.tar.gz
+Patch0:		%{name}-makefile.patch
+URL:		http://sourceforge.net/projects/dc-qt/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	qt-devel
+Requires:	dctc
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
+
+%description
+Direct Connect client (dctc) QT GUI.
+
+%description -l pl
+Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
+
+%prep
+%setup -q
+%patch0 -p1
+
+%build
+export QTDIR=%{_includedir}/qt
+%{__make}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+gzip -9nf README DESIGN
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(644,root,root,755)
+%doc *.gz
+%attr(755,root,root) %{_bindir}/dc_qt
+%attr(644,root,root) %{_applnkdir}/Network/Communications/*
