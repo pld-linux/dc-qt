@@ -12,10 +12,11 @@ Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/dc-qt/%{name}-%{version}.tar.gz
 # Source0-md5:	2653c020cd2cc3957d35f2c1e77b4d46
 Source1:	%{name}.desktop
-URL:		http://sourceforge.net/projects/dc-qt/
+Source2:	%{name}.png
+URL:		http://dc-qt.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	qt-devel >= 2.3
+BuildRequires:	qt-devel >= 3.2
 %{?with_xine:BuildRequires:	xine-lib-devel}
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -44,18 +45,22 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy Qt do dctc (Direct Connect).
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_desktopdir}
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %{__make} install \
-	 DESTDIR=$RPM_BUILD_ROOT
+	 DESTDIR=$RPM_BUILD_ROOT \
+	 kde_htmldir=%{_kdedocdir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README 
+%doc README TODO
 %attr(755,root,root) %{_bindir}/dc_qt
-#%attr(644,root,root) %{_pixmapsdir}/*.xpm
-%attr(644,root,root) %{_desktopdir}/*
+%{_desktopdir}/*
+%{_docdir}/%{name}
+%{_pixmapsdir}/%{name}.png
