@@ -1,5 +1,5 @@
 Summary:	QT GUI for dctc (Direct Connect)
-Summary(pl):	QT GUI do dctc (Direct Connect)
+Summary(pl):	Oparte o QT GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.0.6
 Release:	1
@@ -14,7 +14,6 @@ BuildRequires:	automake
 BuildRequires:	qt-devel >= 2.3
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 Direct Connect client (dctc) QT GUI.
@@ -38,10 +37,10 @@ qmake
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Communications,%{_datadir}/pixmaps,%{_bindir}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Communications,%{_pixmapsdir},%{_bindir}}
 
 install dc-qt		$RPM_BUILD_ROOT%{_bindir}
-#install icon.xpm	$RPM_BUILD_ROOT%{_datadir}/pixmaps/dc_qt.xpm
+#install icon.xpm	$RPM_BUILD_ROOT%{_pixmapsdir}/dc_qt.xpm
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
 %clean
@@ -50,6 +49,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README DESIGN
-%attr(755,root,root) %{_bindir}/dc_qt
-#%attr(644,root,root) %{_datadir}/pixmaps/*.xpm
+%attr(755,root,root) %{_bindir}/dc-qt
+#%attr(644,root,root) %{_pixmapsdir}/*.xpm
 %attr(644,root,root) %{_applnkdir}/Network/Communications/*
