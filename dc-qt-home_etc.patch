@@ -1,0 +1,96 @@
+diff -Nur dc-qt-0.0.4.orig/dc_hub.cc dc-qt-0.0.3.chng/dc_hub.cc
+--- dc-qt-0.0.4.orig/dc_hub.cc	Thu Mar  7 05:13:08 2002
++++ dc-qt-0.0.3.chng/dc_hub.cc	Mon Jun  3 10:27:26 2002
+@@ -31,12 +31,12 @@
+ 
+ void dc_hub::load_list_from_web()
+ {
+-	load_list_from_process("hublist | tee " + settings.get_home_dir() + "/.dc_qt/hublist.cache");
++	load_list_from_process("hublist | tee " + settings.get_dcqt_dir() + "/hublist.cache");
+ }
+ 
+ void dc_hub::load_list_from_disk()
+ {
+-	load_list_from_process("cat " + settings.get_home_dir() + "/.dc_qt/hublist.cache");
++	load_list_from_process("cat " + settings.get_dcqt_dir() + "/hublist.cache");
+ }
+ 
+ void dc_hub::load_list_from_process(const QString& process)
+@@ -98,7 +98,7 @@
+ {
+ 	clear_list(running);
+ 	
+-	const QString dir_name = settings.get_home_dir() + "/.dctc/running";
++	const QString dir_name = settings.get_dctc_dir() + "/running";
+ 
+ 	QDir dir(dir_name, "*", QDir::Name|QDir::IgnoreCase, QDir::System);
+ 
+diff -Nur dc-qt-0.0.4.orig/dc_settings.cc dc-qt-0.0.3.chng/dc_settings.cc
+--- dc-qt-0.0.4.orig/dc_settings.cc	Tue Feb 19 23:21:20 2002
++++ dc-qt-0.0.3.chng/dc_settings.cc	Mon Jun  3 10:18:28 2002
+@@ -29,8 +29,17 @@
+ dc_settings::dc_settings()
+ {
+ 	user_home_dir = getenv("HOME");
+-	settings_file = user_home_dir + "/.dc_qt/dc_qt.conf";
+-	favourites_file = user_home_dir + "/.dc_qt/dc_qt.favourites";
++	
++	if (getenv("CONFIG_DIR")) {
++		dcqt_dir = user_home_dir + "/" + QString(getenv("CONFIG_DIR")) + "/dc_qt";
++		dctc_dir = user_home_dir + "/" + QString(getenv("CONFIG_DIR")) + "/dctc";
++	} else {
++		dcqt_dir = user_home_dir + "/.dc_qt";
++		dctc_dir = user_home_dir + "/.dctc";
++	}
++
++	settings_file = dcqt_dir + "/dc_qt.conf";
++	favourites_file = dcqt_dir + "/dc_qt.favourites";	
+ 
+ 	load_from_file();
+ 	load_favourites_file();
+diff -Nur dc-qt-0.0.4.orig/dc_settings.h dc-qt-0.0.3.chng/dc_settings.h
+--- dc-qt-0.0.4.orig/dc_settings.h	Tue Feb 19 23:21:20 2002
++++ dc-qt-0.0.3.chng/dc_settings.h	Mon Jun  3 10:19:44 2002
+@@ -49,12 +49,16 @@
+ 	int num_shares() const {return shares.size();}
+ 	const QString get_share(int i);
+ 	const QString get_home_dir() const { return user_home_dir; }
++	const QString get_dcqt_dir() const { return dcqt_dir; }
++	const QString get_dctc_dir() const { return dctc_dir; }
+ 
+ private:
+ 	int get_setting_key(const QString &s) const;
+ 
+ 	QString settings_file;
+ 	QString favourites_file;
++	QString dcqt_dir;
++	QString dctc_dir;
+ 	
+ 	set<QString> shares;
+ 	Map settings;
+diff -Nur dc-qt-0.0.4.orig/dctc_connection.cc dc-qt-0.0.3.chng/dctc_connection.cc
+--- dc-qt-0.0.4.orig/dctc_connection.cc	Sun Mar 10 21:31:27 2002
++++ dc-qt-0.0.3.chng/dctc_connection.cc	Mon Jun  3 10:26:35 2002
+@@ -183,7 +183,7 @@
+ 	// we open the socket created by dctc in $HOME/.dctc/running/dctc-xxxxx-yyyyy
+ 	// where xxxxx == the pid of the client in hex
+ 	// yyyyy == the ip of the hub
+-	QString socket_path = settings.get_home_dir() + "/.dctc/running/";
++	QString socket_path = settings.get_dctc_dir() + "/running/";
+ 	socket_path += "dctc-";
+ 	socket_path += pidhex;
+ 	socket_path += "-";
+diff -Nur dc-qt-0.0.4.orig/main.cc dc-qt-0.0.3.chng/main.cc
+--- dc-qt-0.0.4.orig/main.cc	Tue Feb 26 00:51:03 2002
++++ dc-qt-0.0.3.chng/main.cc	Mon Jun  3 10:27:52 2002
+@@ -32,8 +32,8 @@
+ 	dc_qt->show();
+ 
+ 	// check for existance of $HOME/.dc_qt
+-	if (system("[ -x " + settings.get_home_dir() + "/.dc_qt ]") != 0)
+-		system("mkdir " + settings.get_home_dir() + "/.dc_qt");
++	if (system("[ -x " + settings.get_dcqt_dir() + " ]") != 0)
++		system("mkdir " + settings.get_dcqt_dir());
+ 
+ 	QFont f("Arial", 12, QFont::Normal);
+ 	app.setFont(f, true);
