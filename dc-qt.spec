@@ -2,7 +2,7 @@ Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	Oparte o QT GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.1.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
@@ -40,12 +40,12 @@ sed 's/-lqt/-lqt-mt/'	-i configure.ac
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
+install -d $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__make} install \
 	 DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
+install %{SOURCE1}	$RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -55,4 +55,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc README 
 %attr(755,root,root) %{_bindir}/dc_qt
 #%attr(644,root,root) %{_pixmapsdir}/*.xpm
-%attr(644,root,root) %{_applnkdir}/Network/Communications/*
+%attr(644,root,root) %{_desktopdir}/*
