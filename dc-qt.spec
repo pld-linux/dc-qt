@@ -2,13 +2,14 @@ Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	QT GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.0.3
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
 # Sourceforge is crazy with this mirrors... telia is fast...
 Source0:	http://telia.dl.sourceforge.net/sourceforge/dc-qt/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-home_etc.patch
 URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -28,6 +29,7 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 export QTDIR=%{_includedir}/qt
