@@ -1,12 +1,12 @@
 Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	Oparte o QT GUI do dctc (Direct Connect)
 Name:		dc-qt
-Version:	0.0.6
+Version:	0.0.7
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	71b76b159e48719e69c623bad89fbcba
+# Source0-md5:	b335503b020e2cb067383a35321c6652
 Source1:	%{name}.desktop
 URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
@@ -27,20 +27,16 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %build
 export QTDIR=/usr
 
-qmake
-
-%{__make} \
-	CC="%{__cc}" \
-	CXX="%{__cxx}" \
-	CFLAGS="%{rpmcflags}" \
-	CXXFLAGS="%{rpmcflags}"
+%configure
+%{__make} 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Network/Communications,%{_pixmapsdir},%{_bindir}}
+install -d $RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
-install dc-qt		$RPM_BUILD_ROOT%{_bindir}
-#install icon.xpm	$RPM_BUILD_ROOT%{_pixmapsdir}/dc_qt.xpm
+%{__make} install \
+	 DESTDIR=$RPM_BUILD_ROOT
+
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
 %clean
@@ -48,7 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README DESIGN
-%attr(755,root,root) %{_bindir}/dc-qt
+%doc README 
+%attr(755,root,root) %{_bindir}/dc_qt
 #%attr(644,root,root) %{_pixmapsdir}/*.xpm
 %attr(644,root,root) %{_applnkdir}/Network/Communications/*
