@@ -7,4 +7,5 @@ Icon=dc_qt.xpm
 Terminal=false
 MultipleArgs=false
 Type=Application
+Encoding=UTF-8
 # vi: encoding=utf-8
