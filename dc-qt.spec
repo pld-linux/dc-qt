@@ -9,7 +9,7 @@ Version:	0.1.1
 Release:	2
 License:	GPL v2
 Group:		X11/Applications/Networking
-Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/dc-qt/%{name}-%{version}.tar.gz
 # Source0-md5:	411758af4bf06198570aa14f534249e0
 Source1:	%{name}.desktop
 Patch0:		%{name}-configure.patch
@@ -52,7 +52,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 %{__make} install \
 	 DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1}	$RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
