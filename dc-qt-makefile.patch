@@ -1,7 +1,11 @@
 --- ./Makefile.org	Sun Mar 10 21:33:00 2002
-+++ ./Makefile	Sat May 11 19:23:01 2002
-@@ -16,7 +16,7 @@
- CXXFLAGS = -pipe -g -D_DEBUG -D_QT_3 -D_VERBOSE  
++++ ./Makefile	Sun May 12 05:04:11 2002
+@@ -13,16 +13,16 @@
+ LEX      = flex
+ YACC     = yacc
+ CFLAGS   = -pipe -g  
+-CXXFLAGS = -pipe -g -D_DEBUG -D_QT_3 -D_VERBOSE  
++CXXFLAGS = -pipe -g -D_DEBUG -D_VERBOSE  
  LEXFLAGS = 
  YACCFLAGS= -d
 -INCPATH  = -I$(QTDIR)/include -I$(QTDIR)/mkspecs/linux-g++
@@ -9,3 +13,10 @@
  LINK     = g++
  LFLAGS   = 
  LIBS     = $(SUBLIBS) -Wl,-rpath,$(QTDIR)/lib -L$(QTDIR)/lib -L/usr/X11R6/lib -lqt -lXext -lX11 -lm
+ AR       = ar cqs
+ RANLIB   = 
+-MOC      = $(QTDIR)/bin/moc
++MOC      = /usr/X11R6/bin/moc
+ UIC      = $(QTDIR)/bin/uic
+ QMAKE    = qmake
+ TAR      = tar -cf
