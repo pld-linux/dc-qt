@@ -12,7 +12,6 @@ URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	qt-devel >= 2.3
-BuildRequires:	qt-st-devel >= 2.3
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -26,9 +25,12 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %setup -q
 
 %build
-export QTDIR=/usr/
+QTDIR=%{_prefix}; export QTDIR
 
-%configure --with-qt-libs=/usr/lib/
+%configure \
+	--with-qt-libs=%{_libdir} \
+	--with-qt-includes=%{_includedir}/qt/
+
 %{__make} 
 
 %install
