@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_without	xine	# disable media file preview (uses xine)
 #
-Summary:	QT GUI for dctc (Direct Connect)
-Summary(pl):	Oparte o QT GUI do dctc (Direct Connect)
+Summary:	Qt GUI for dctc (Direct Connect)
+Summary(pl):	Oparte o Qt GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.1.2
 Release:	1
@@ -21,10 +21,10 @@ Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Direct Connect client (dctc) QT GUI.
+Direct Connect client (dctc) Qt GUI.
 
 %description -l pl
-Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
+Graficzny interfejs u¿ytkownika u¿ywaj±cy Qt do dctc (Direct Connect).
 
 %prep
 %setup -q
