@@ -1,17 +1,18 @@
 Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	Oparte o QT GUI do dctc (Direct Connect)
 Name:		dc-qt
-Version:	0.0.8
+Version:	0.0.9
 Release:	1
 License:	GPL v2
 Group:		X11/Applications/Networking
 Source0:	http://dl.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	0a4481813107f516a51cb3798892fd3e
+# Source0-md5:	6314b8e7e86c11faaf043b9f104ed14c
 Source1:	%{name}.desktop
 URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	qt-devel >= 2.3
+BuildRequires:	qt-st-devel >= 2.3
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -25,9 +26,9 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %setup -q
 
 %build
-export QTDIR=/usr
+export QTDIR=/usr/
 
-%configure
+%configure --with-qt-libs=/usr/lib/
 %{__make} 
 
 %install
