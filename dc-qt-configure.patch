@@ -1,0 +1,42 @@
+--- dc-qt-0.1.1/configure.ac.orig	2004-05-12 22:38:30.000000000 +0200
++++ dc-qt-0.1.1/configure.ac	2004-07-28 13:30:28.588477704 +0200
+@@ -38,14 +38,14 @@
+ 	do
+ 		for i in $QTLIBS
+ 		do
+-			if test -f $dir/lib$i.so
++			if test -f $dir/lib$i-mt.so
+ 			then
+ 				QTLIBDIR=$dir
+ 				AC_MSG_RESULT("found in $QTLIBDIR")
+ 				QTMT=$i
+ 				break 2
+ 			else
+-				if test -f $dir/lib/lib$i.so
++				if test -f $dir/lib/lib$i-mt.so
+ 				then
+ 					QTLIBDIR=$dir/lib
+ 					AC_MSG_RESULT("found in $QTLIBDIR")
+@@ -186,7 +186,7 @@
+ 	echo ""
+ 	exit
+ else
+-	QTLIBDIR="-L$QTLIBDIR -lqt"
++	QTLIBDIR="-L$QTLIBDIR -lqt-mt"
+ fi
+ 
+ dnl 
+@@ -440,12 +440,11 @@
+     prefix="/usr/local"
+ fi
+ 
+-CXXFLAGS=""
+ if test "x$enable_debug" = "xyes"
+ then
+ 	CXXFLAGS="-Wall -g3 -D_DEBUG -DPREFIX=$prefix"
+ else 
+-	CXXFLAGS="-O2 -DPREFIX=$prefix"
++	CXXFLAGS="$CXXFLAGS -DPREFIX=$prefix"
+ fi
+ 
+ if test "x$enable_preview" = x ; then
