@@ -17,8 +17,6 @@ BuildRequires:	qt-devel >= 2.3
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Direct Connect client (dctc) QT GUI.
