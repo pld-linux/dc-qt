@@ -32,7 +32,8 @@ Graficzny interfejs u¿ytkownika u¿ywaj±cy QT do dctc (Direct Connect).
 %patch1 -p1
 
 %build
-export QTDIR=%{_includedir}/qt
+QTDIR=%{_includedir}/qt
+export QTDIR
 %{__make}
 
 %install
@@ -45,14 +46,12 @@ install dc_qt		$RPM_BUILD_ROOT%{_bindir}
 install icon.xpm	$RPM_BUILD_ROOT%{_datadir}/pixmaps/dc_qt.xpm
 install %{SOURCE1}	$RPM_BUILD_ROOT%{_applnkdir}/Network/Communications
 
-gzip -9nf README DESIGN
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README DESIGN
 %attr(755,root,root) %{_bindir}/dc_qt
 %attr(644,root,root) %{_datadir}/pixmaps/*.xpm
 %attr(644,root,root) %{_applnkdir}/Network/Communications/*
