@@ -12,6 +12,7 @@ URL:		http://sourceforge.net/projects/dc-qt/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	qt-devel >= 2.3
+BuildRequires:	sed >= 4.0
 Requires:	dctc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
