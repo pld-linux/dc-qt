@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=dc-qt
+Comment=QT frontend for DCTC Direct Connect Client
+Comment[pl_PL.ISO8859-2]=QT frontend dla Klienta Direct Connecta DCTC
+Exec=dc_qt
+Icon=dc_qt.xpm
+Terminal=false
+MultipleArgs=false
+Type=Application
+
