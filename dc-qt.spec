@@ -2,7 +2,7 @@ Summary:	QT GUI for dctc (Direct Connect)
 Summary(pl):	QT GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.0.3
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		X11/Applications/Networking
 # Sourceforge is crazy with this mirrors... telia is fast...
