@@ -3,7 +3,7 @@
 %bcond_without	xine	# disable media file preview (uses xine)
 #
 Summary:	Qt GUI for dctc (Direct Connect)
-Summary(pl.UTF-8):   Oparte o Qt GUI do dctc (Direct Connect)
+Summary(pl.UTF-8):	Oparte o Qt GUI do dctc (Direct Connect)
 Name:		dc-qt
 Version:	0.1.2
 Release:	1
