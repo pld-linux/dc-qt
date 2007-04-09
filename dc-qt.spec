@@ -16,7 +16,7 @@ Source2:	%{name}.png
 URL:		http://dc-qt.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	qt-devel >= 3.2
+BuildRequires:	qt-devel >= 6:3.2
 BuildRequires:	rpmbuild(macros) >= 1.129
 %{?with_xine:BuildRequires:	xine-lib-devel}
 Requires:	dctc
